@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Minesweeper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        td {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            vertical-align: middle;
+            border: 2px solid #888;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #ddd;
+        }
+        td.mine {
+            background-color: #f44336;
+        }
+        td.revealed {
+            background-color: #fff;
+            cursor: default;
+        }
+        td.flagged {
+            background-color: #ffeb3b;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #controls {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minesweeper</h1>
+
+    <div id="controls">
+        <label for="difficulty">難易度を選択：</label>
+        <select id="difficulty">
+            <option value="easy">簡単 (10x10, 10地雷)</option>
+            <option value="normal" selected>普通 (15x15, 40地雷)</option>
+            <option value="hard">難しい (22x15, 64地雷)</option>
+        </select>
+        <button onclick="startGame()">開始</button>
+    </div>
+
+    <div id="message"></div>
+    <div id="timer">Time: 0 seconds</div>
+    <div id="flag-count">Flags remaining: 0</div>
+    <table id="minesweeper"></table>
+    <button onclick="resetGame()">Restart Game</button>
+
+    <script>
+        // 難易度ごとの設定
+        const difficulties = {
+            easy: { rows: 10, cols: 10, mines: 10 },
+            normal: { rows: 15, cols: 15, mines: 40 },
+            hard: { rows: 22, cols: 15, mines: 64 }
+        };
+
+        // 盤面サイズと地雷数を動的に設定
+        let rows, cols, numMines;
+
+        let board = [];
+        let revealed = [];
+        let gameOver = false;
+        let flags = 0;
+        let firstClick = true;
+        let startTime;
+        let timerInterval;
+
+        function createBoard() {
+            board = [];
+            revealed = [];
+            for (let r = 0; r < rows; r++) {
+                board[r] = [];
+                revealed[r] = [];
+                for (let c = 0; c < cols; c++) {
+                    board[r][c] = 0;
+                    revealed[r][c] = false;
+                }
+            }
+        }
+
+        function placeMines(excludeRow, excludeCol) {
+            let minesPlaced = 0;
+            while (minesPlaced < numMines) {
+                let r = Math.floor(Math.random() * rows);
+                let c = Math.floor(Math.random() * cols);
+                // 最初のクリックの周囲に地雷を置かない
+                if (board[r][c] === 0 && (r !== excludeRow || c !== excludeCol) && isValidMineLocation(r, c, excludeRow, excludeCol)) {
+                    board[r][c] = -1;
+                    minesPlaced++;
+                }
+            }
+        }
+
+        function isValidMineLocation(r, c, excludeRow, excludeCol) {
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    let newRow = r + i;
+                    let newCol = c + j;
+                    if (newRow === excludeRow && newCol === excludeCol) {
+                        return false; // 初回クリック位置の周囲
+                    }
+                }
+            }
+            return true; // 地雷を置ける
+        }
+
+        function calculateNumbers() {
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    if (board[r][c] === -1) continue;
+                    let count = 0;
+                    for (let i = -1; i <= 1; i++) {
+                        for (let j = -1; j <= 1; j++) {
+                            let newRow = r + i;
+                            let newCol = c + j;
+                            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols && board[newRow][newCol] === -1) {
+                                count++;
+                            }
+                        }
+                    }
+                    board[r][c] = count;
+                }
+            }
+        }
+
+        function renderBoard() {
+            let table = document.getElementById("minesweeper");
+            table.innerHTML = "";
+            for (let r = 0; r < rows; r++) {
+                let row = document.createElement("tr");
+                for (let c = 0; c < cols; c++) {
+                    let cell = document.createElement("td");
+                    cell.setAttribute("data-row", r);
+                    cell.setAttribute("data-col", c);
+                    cell.onclick = function () { revealCell(r, c); };
+                    cell.oncontextmenu = function (e) { flagCell(r, c); e.preventDefault(); };
+                    row.appendChild(cell);
+                }
+                table.appendChild(row);
+            }
+        }
+
+        function revealCell(r, c) {
+            if (revealed[r][c] || gameOver) return;
+            if (firstClick) {
+                placeMines(r, c); // 最初のクリック位置に地雷を置かない
+                calculateNumbers();
+                startTime = new Date(); // ゲーム開始時刻を記録
+                timerInterval = setInterval(updateTimer, 1000); // タイマーを開始
+                firstClick = false; // 一度クリックしたら、最初のクリックが完了
+            }
+            revealed[r][c] = true;
+            let cell = document.querySelector(`[data-row='${r}'][data-col='${c}']`);
+            if (board[r][c] === -1) {
+                cell.innerHTML = "💣";
+                cell.classList.add("mine");
+                gameOver = true;
+                clearInterval(timerInterval); // タイマーを停止
+                document.getElementById("message").innerHTML = "<p style='color: red;'>Game Over! You hit a mine.</p>";
+                revealAllCells(); // 全てのマスを開示
+            } else {
+                cell.innerHTML = board[r][c] === 0 ? "" : board[r][c];
+                cell.classList.add("revealed");
+                if (board[r][c] === 0) {
+                    for (let i = -1; i <= 1; i++) {
+                        for (let j = -1; j <= 1; j++) {
+                            let newRow = r + i;
+                            let newCol = c + j;
+                            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+                                revealCell(newRow, newCol);
+                            }
+                        }
+                    }
+                }
+                checkWin();
+            }
+        }
+
+        function flagCell(r, c) {
+            if (revealed[r][c] || gameOver) return;
+            let cell = document.querySelector(`[data-row='${r}'][data-col='${c}']`);
+            if (cell.classList.contains("flagged")) {
+                cell.classList.remove("flagged");
+                cell.innerHTML = "";
+                flags--;
+            } else if (flags < numMines) { // フラグの数が地雷数未満の場合のみフラグを立てる
+                cell.classList.add("flagged");
+                cell.innerHTML = "🚩";
+                flags++;
+            }
+            updateFlagCount();
+        }
+
+        function updateFlagCount() {
+            let remainingFlags = numMines - flags;
+            document.getElementById("flag-count").innerHTML = "Flags remaining: " + remainingFlags;
+        }
+
+        function checkWin() {
+            let unrevealedCells = 0;
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    if (!revealed[r][c] && board[r][c] !== -1) {
+                        unrevealedCells++;
+                    }
+                }
+            }
+            if (unrevealedCells === 0) {
+                gameOver = true;
+                clearInterval(timerInterval);
+                document.getElementById("message").innerHTML = "<p style='color: green;'>You Win!</p>";
+                revealAllCells(); // 全てのマスを開示
+            }
+        }
+
+        function revealAllCells() {
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    let cell = document.querySelector(`[data-row='${r}'][data-col='${c}']`);
+                    revealed[r][c] = true;
+                    if (board[r][c] === -1) {
+                        cell.innerHTML = "💣";
+                        cell.classList.add("mine");
+                    } else {
+                        cell.innerHTML = board[r][c] === 0 ? "" : board[r][c];
+                        cell.classList.add("revealed");
+                    }
+                }
+            }
+        }
+
+        function updateTimer() {
+            let currentTime = Math.floor((new Date() - startTime) / 1000);
+            document.getElementById("timer").innerHTML = "Time: " + currentTime + " seconds";
+        }
+
+        function resetGame() {
+            board = [];
+            revealed = [];
+            gameOver = false;
+            flags = 0;
+            firstClick = true;
+            document.getElementById("message").innerHTML = "";
+            document.getElementById("timer").innerHTML = "Time: 0 seconds";
+            clearInterval(timerInterval);
+            createBoard();
+            renderBoard();
+            updateFlagCount();
+        }
+
+        function startGame() {
+            const diff = document.getElementById("difficulty").value;
+            rows = difficulties[diff].rows;
+            cols = difficulties[diff].cols;
+            numMines = difficulties[diff].mines;
+
+            resetGame();
+        }
+
+        // 初期設定として普通難易度で初期化しておく
+        rows = difficulties.normal.rows;
+        cols = difficulties.normal.cols;
+        numMines = difficulties.normal.mines;
+
+        // ページロード時はゲーム盤は空で開始。ユーザーが開始ボタンを押すまで待つ
+        // もしすぐ開始したい場合はコメントアウトを外してください
+        // startGame();
+
+    </script>
+</body>
+</html>
