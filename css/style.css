@@ -1,0 +1,109 @@
+/* ベーススタイル */
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background: #f9f9f9;
+  color: #333;
+}
+
+/* ヘッダー */
+header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+header h1 a {
+  color: white;
+  text-decoration: none;
+}
+
+header h1 a:visited {
+  color: white; /* 訪問済みでも色を変えない */
+}
+
+nav {
+  margin-top: 0.5rem;
+}
+
+nav a {
+  color: #ecf0f1;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-top: 1px solid #ddd;
+}
+
+/* コンテンツ領域 */
+main {
+  padding: 1.5rem;
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* 記事一覧 */
+#posts-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+#posts-list li {
+  margin-bottom: 1rem;
+}
+
+#posts-list a {
+  text-decoration: none;
+  color: #3498db;
+  font-weight: bold;
+}
+
+#posts-list a:hover {
+  text-decoration: underline;
+}
+
+/* フッター */
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+  margin: 2rem 0;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 0.3rem 0.5rem;
+  }
+
+  main {
+    padding: 1rem;
+  }
+}
