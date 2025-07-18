@@ -266,6 +266,12 @@ aside p {
 .sns-box {
     width: 30%;
 }
+.sns-box a {
+    color: #eeeeee;
+}
+.sns-box a:hover {
+    color: #cccccc;
+}
 
 /* フッター
 ------------------------------- */
