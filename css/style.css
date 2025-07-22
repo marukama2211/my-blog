@@ -211,14 +211,15 @@ aside p {
     margin: 10px 0 0;
 }
 */
-
+.gallery-section {
+  background: #eeeeee;
+}
 .grid {
   display: grid;
   gap: 26px;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   margin-top: 6%;
   margin-bottom: 50px;
-  background: #eeeeee;
 }
 
 /* CONTACT
