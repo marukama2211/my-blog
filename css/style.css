@@ -292,28 +292,28 @@ footer p {
         margin-top: 14px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         width: 60px;
-        height: 50px;
+        height: 60px;
         cursor: pointer;
+        gap: 10px;
     }
     .hamburger-line {
         width: 100%;
-        height: 4px;
+        height: 3px;
         background-color: white;
         border-radius: 3px;
-        transition: 0.5s;
-        transform-origin: center;
+        transition: 0.3s ease;
     }
     #menu-open:checked + .hamburger-menu .hamburger-line:nth-child(1) {
-        transform: rotate(45deg);
+        transform: translateY(13px) rotate(45deg);
     }
     #menu-open:checked + .hamburger-menu .hamburger-line:nth-child(2) {
         opacity: 0;
     }
     #menu-open:checked + .hamburger-menu .hamburger-line:nth-child(3) {
-        transform: rotate(-45deg);
+        transform: translateY(-13px) rotate(-45deg);
     }
     .main-nav {
         position: fixed;
