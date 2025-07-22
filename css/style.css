@@ -218,6 +218,7 @@ aside p {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   margin-top: 6%;
   margin-bottom: 50px;
+  background: #eeeeee;
 }
 
 /* CONTACT
