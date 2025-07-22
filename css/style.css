@@ -202,14 +202,6 @@ aside p {
     min-height: 100vh;
     color:#eeeeee;
 }
-.gallery-content {
-    max-width: 560px;
-    margin-top: 10%;
-}
-.gallery-content p {
-    font-size: 1.125rem;
-    margin: 10px 0 0;
-}
 .grid {
   display: grid;
   gap: 26px;
@@ -389,8 +381,8 @@ footer p {
     }
 
     /* GALLERY */
-    .gallery-content {
-        margin-top: 20%;
+    #garrely .page-title {
+        margin-top: 40px;
     }
 
     /* CONTACT */
