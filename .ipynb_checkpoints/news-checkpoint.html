@@ -2,14 +2,24 @@
 <html lang="ja">
     <head>
         <meta charset="utf-8">
-        <title>まるかま - NEWS</title>
+        <title>marucama - NEWS</title>
         <meta name="description" content="民宿オブ白馬村">
         <link rel="icon" type="image/png" href="images/favicon.png">
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png" sizes="180×180">
+        <link rel="icon" type="image/png" href="images/android-touch-icon.png" sizes="192×192">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:url" content="https://www.marucama.com/news.html">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Marucama News">
+        <meta property="og:description" content="まるかまのブログだよ。登山やカメラについて書くよ。">
+        <meta property="og:image" content="https://64.media.tumblr.com/0a65cd9e70cddd02947dbc7e6126cc22/a0211cbfac83ddeb-59/s1280x1920/d74b28b7dd64ade7b74401a71eb714ac29c725fd.jpg">
 
     <!-- CSS -->
         <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
     </head>
 
@@ -17,13 +27,18 @@
         <div id="news" class="big-bg">
             <header class="page-header wrapper">
                 <h1><a href="index.html"><img class="logo" src="images/logo.png" alt="まるかま ホーム"></a></h1>
-                <nav>
-                    <ul class="main-nav">
-                        <li><a href="news.html">News</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
+                <input id="menu-open" type="checkbox">
+                <label for="menu-open" class="hamburger-menu">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </label><!-- /.hamburger-menu -->
+                <ul class="main-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </header>
 
             <div class="wrapper">
@@ -31,48 +46,110 @@
             </div><!-- /.wrapper -->
         </div><!-- /#news -->
 
-        <div class="news-contents wrapper">
-            <article>
-                <header class="post-info">
-                    <h2 class="post-title">雪の荘、リニューアルオープン</h2>
-                    <p class="post-date">12/3 <span>2024</span></p>
-                    <p class="post-cat">カテゴリー：その他</p>
-                </header>
-                <img src="images/wall.jpg" alt="館内の様子">
-                <p>
-                    雪の荘は今期からゲストハウスとして営業します。
-                </p>
-                <p>
-                    新しい体制で頑張っていきます。応援よろしくお願いします。
-                </p>
-                <p>
-                    外国人観光客の受け入れも拡大します。ぜひお越しくださいませ。
-                </p>
-            </article>
+        <div class="news-catalog">
+          <div class="wrapper grid">
+              
+            <div class="item">
+              <a href="2025-07-27-yukinoso.html" class="main-link">
+                <img src="images/gallery1.webp" alt="">
+                <h3>雪の荘リニューアルオープン</h3>
+              </a>
+              <p class="meta">
+                <a href="news.html" class="tag">その他</a>
+                <span class="date">2025-07-27</span>
+              </p>
+            </div>
+        
+            <div class="item">
+              <a href="2025-07-27-yukinoso.html" class="main-link">
+                <img src="images/gallery2.webp" alt="">
+                <h3>雪の荘リニューアルオープン</h3>
+              </a>
+              <p class="meta">
+                <a href="news.html" class="tag">その他</a>
+                <span class="date">2025-07-25</span>
+              </p>
+            </div>
 
-            <aside>
-                <h3 class="sub-title">新着記事</h3>
-                <ul class="hot-news"></ul>
-                <h3 class="sub-title">カテゴリー</h3>
-                <ul class="sub-menu">
-                    <li><a href="news/mount.html">登山</a></li>
-                    <li><a href="news/photo.html">カメラ</a></li>
-                    <li><a href="news/journey.html">旅行</a></li>
-                    <li><a href="news/others.html">その他</a></li>
-                </ul>
+            <div class="item">
+              <a href="2025-07-27-yukinoso.html" class="main-link">
+                <img src="images/gallery3.webp" alt="">
+                <h3>雪の荘リニューアルオープン</h3>
+              </a>
+              <p class="meta">
+                <a href="news.html" class="tag">その他</a>
+                <span class="date">2025-07-25</span>
+              </p>
+            </div>
+              
+            <div class="item">
+              <a href="2025-07-27-yukinoso.html" class="main-link">
+                <img src="images/gallery4.webp" alt="">
+                <h3>雪の荘リニューアルオープン</h3>
+              </a>
+              <p class="meta">
+                <a href="news.html" class="tag">その他</a>
+                <span class="date">2025-07-25</span>
+              </p>
+            </div>
+              
+            <div class="item">
+              <a href="2025-07-27-yukinoso.html" class="main-link">
+                <img src="images/gallery5.webp" alt="">
+                <h3>雪の荘リニューアルオープン</h3>
+              </a>
+              <p class="meta">
+                <a href="news.html" class="tag">その他</a>
+                <span class="date">2025-07-25</span>
+              </p>
+            </div>
 
-                <h3 class="sub-title">writerについて</h3>
-                <p>
-                    僕は白馬村の雪の荘ってとこに住んでたんだよ。
-                </p>
-                <p>
-                    白馬村で大自然を堪能して満喫したい？だったら雪の荘に来なよ。
-                </p>
-                <p>
-                    夏の登山や冬のスキーはもちろん、春の少し遅れた桜や秋の少し早まった紅葉だって楽しめるよ～
-                </p>
-            </aside>
-        </div><!-- /.news-contents -->
+            <div class="item">
+              <a href="2025-07-27-yukinoso.html" class="main-link">
+                <img src="images/gallery6.webp" alt="">
+                <h3>雪の荘リニューアルオープン</h3>
+              </a>
+              <p class="meta">
+                <a href="news.html" class="tag">その他</a>
+                <span class="date">2025-07-25</span>
+              </p>
+            </div>
+
+            <div class="item">
+              <a href="2025-07-27-yukinoso.html" class="main-link">
+                <img src="images/gallery7.webp" alt="">
+                <h3>雪の荘リニューアルオープン</h3>
+              </a>
+              <p class="meta">
+                <a href="news.html" class="tag">その他</a>
+                <span class="date">2025-07-25</span>
+              </p>
+            </div>
+
+            <div class="item">
+              <a href="2025-07-27-yukinoso.html" class="main-link">
+                <img src="images/gallery8.webp" alt="">
+                <h3>雪の荘リニューアルオープン</h3>
+              </a>
+              <p class="meta">
+                <a href="news.html" class="tag">その他</a>
+                <span class="date">2025-07-25</span>
+              </p>
+            </div>   
+
+            <div class="item">
+              <a href="2025-07-27-yukinoso.html" class="main-link">
+                <img src="images/gallery9.webp" alt="">
+                <h3>雪の荘リニューアルオープン</h3>
+              </a>
+              <p class="meta">
+                <a href="news.html" class="tag">その他</a>
+                <span class="date">2025-07-25</span>
+              </p>
+            </div>              
+              
+          </div>
+        </div><!-- /.news-catalog -->
 
         <footer>
             <div class="wrapper">

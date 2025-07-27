@@ -35,7 +35,7 @@ img {
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     font-weight: normal;
-    text-shadoe: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 .sub-title {
     font-size: 1.375rem;
@@ -75,7 +75,7 @@ iframe {
 }
 .logo {
     width: 50px;
-    margin-top: 14px;
+    margin-top: 24px;
 }
 .main-nav {
     display: flex;
@@ -109,6 +109,7 @@ iframe {
     text-align: center;
     margin-top: 6%;
     padding-top: 0;
+    margin-bottom: 6%;
 }
 .home-content p {
     font-size: 1.125rem;
@@ -128,6 +129,74 @@ iframe {
     display: flex;
     justify-content: space-between;
     margin-bottom: 50px;
+}
+
+/* 一覧 */
+.news-catalog .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.news-catalog .item {
+  display: flex;
+  flex-direction: column;
+  background: #ebebeb;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.news-catalog .main-link {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  text-decoration: none;
+  color: #888888;
+}
+
+.news-catalog .main-link img {
+  width: 100px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.news-catalog .main-link h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  transition color 0.3s ease;
+}
+
+.news-catalog .main-link:hover img {
+    transform: scale(1.05);
+}
+
+.news-catalog .main-link:hover h3 {
+    color: #4a90e2;
+}
+
+.news-catalog .meta {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #666;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.news-catalog .meta .tag {
+  background-color: #e0e0e0;
+  padding: 0.1em 0.5em;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #333;
+}
+
+.news-catalog .meta .tag:hover {
+  background-color: #ddd;
 }
 
 /* 記事部分 */
@@ -177,6 +246,21 @@ article p {
 aside {
     width: 22%;
 }
+.hot-news {
+    margin-bottom: 60px;
+    list-style: none;
+}
+.hot-news li {
+    border-bottom: 1px #555555 solid;
+}
+.hot-news a {
+    color: #888888;
+    padding: 10px;
+    display: block;
+}
+.hot-news a:hover {
+    color: #4a90e2;
+}
 .sub-menu {
     margin-bottom: 60px;
     list-style: none;
@@ -199,7 +283,7 @@ aside p {
 /* GALLERY
 ------------------------------- */
 #gallery {
-    background-image: url("https://64.media.tumblr.com/8019e1e16a7d0417ae0aaab54f4a6379/7ee668739579702c-3c/s1280x1920/6eef0819014a7a81f830fded6a8e944fa37e1e87.jpg");
+    background-image: url("https://64.media.tumblr.com/63cba7dbc8271553f94088eef0d592a2/d7bcdbce5754b15b-3b/s1280x1920/6e60744b21158457008696e916dca2e987abac35.jpg");
     min-height: 100vh;
     color:#eeeeee;
 }
@@ -215,7 +299,7 @@ aside p {
 ------------------------------- */
 #contact {
     background-image: url("https://64.media.tumblr.com/c05ef2af4cb96ae9d3e002c71f8f51d0/7ee668739579702c-b0/s1280x1920/ab14f75d97a65ff1fff829cc82582411155a7803.jpg");
-    background-position: right;
+    background-position: center;
     min-height: 100vh;
     color:#eeeeee;
 }
@@ -319,7 +403,7 @@ footer p {
         height: 100%;
         z-index: 99;
         left: 100%;
-        background: #121212;
+        background: rgba(18, 18, 18, 0.7);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -349,6 +433,9 @@ footer p {
     }
     #news .page-title {
         margin-top: 30px;
+    }
+    .news-catalog .grid {
+    grid-template-columns: 1fr;
     }
     article,
     aside {

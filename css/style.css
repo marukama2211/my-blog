@@ -75,7 +75,7 @@ iframe {
 }
 .logo {
     width: 50px;
-    margin-top: 14px;
+    margin-top: 24px;
 }
 .main-nav {
     display: flex;
@@ -109,6 +109,7 @@ iframe {
     text-align: center;
     margin-top: 6%;
     padding-top: 0;
+    margin-bottom: 6%;
 }
 .home-content p {
     font-size: 1.125rem;
@@ -128,6 +129,74 @@ iframe {
     display: flex;
     justify-content: space-between;
     margin-bottom: 50px;
+}
+
+/* 一覧 */
+.news-catalog .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.news-catalog .item {
+  display: flex;
+  flex-direction: column;
+  background: #ebebeb;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.news-catalog .main-link {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  text-decoration: none;
+  color: #888888;
+}
+
+.news-catalog .main-link img {
+  width: 100px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.news-catalog .main-link h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  transition color 0.3s ease;
+}
+
+.news-catalog .main-link:hover img {
+    transform: scale(1.05);
+}
+
+.news-catalog .main-link:hover h3 {
+    color: #4a90e2;
+}
+
+.news-catalog .meta {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #666;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.news-catalog .meta .tag {
+  background-color: #e0e0e0;
+  padding: 0.1em 0.5em;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #333;
+}
+
+.news-catalog .meta .tag:hover {
+  background-color: #ddd;
 }
 
 /* 記事部分 */
@@ -176,6 +245,21 @@ article p {
 /* サイドバー */
 aside {
     width: 22%;
+}
+.hot-news {
+    margin-bottom: 60px;
+    list-style: none;
+}
+.hot-news li {
+    border-bottom: 1px #555555 solid;
+}
+.hot-news a {
+    color: #888888;
+    padding: 10px;
+    display: block;
+}
+.hot-news a:hover {
+    color: #4a90e2;
 }
 .sub-menu {
     margin-bottom: 60px;
@@ -349,6 +433,9 @@ footer p {
     }
     #news .page-title {
         margin-top: 30px;
+    }
+    .news-catalog .grid {
+    grid-template-columns: 1fr;
     }
     article,
     aside {

@@ -2,14 +2,24 @@
 <html lang="ja">
     <head>
         <meta charset="utf-8">
-        <title>まるかま - CONTACT</title>
+        <title>marucama - CONTACT</title>
         <meta name="description" content="民宿オブ白馬村">
         <link rel="icon" type="image/png" href="images/favicon.png">
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png" sizes="180×180">
+        <link rel="icon" type="image/png" href="images/android-touch-icon.png" sizes="192×192">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:url" content="https://www.marucama.com/contact.html">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Marucama Contact">
+        <meta property="og:description" content="お問い合わせはこちらだよ。雪の荘にもぜひ泊まりに行ってね。">
+        <meta property="og:image" content="https://64.media.tumblr.com/c05ef2af4cb96ae9d3e002c71f8f51d0/7ee668739579702c-b0/s1280x1920/ab14f75d97a65ff1fff829cc82582411155a7803.jpg">
 
     <!-- CSS -->
         <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
     </head>
 
@@ -17,13 +27,18 @@
         <div id="contact" class="big-bg">
             <header class="page-header wrapper">
                 <h1><a href="index.html"><img class="logo" src="images/logo.png" alt="まるかま ホーム"></a></h1>
-                <nav>
-                    <ul class="main-nav">
-                        <li><a href="news.html">News</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
+                <input id="menu-open" type="checkbox">
+                <label for="menu-open" class="hamburger-menu">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </label><!-- /.hamburger-menu -->
+                <ul class="main-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </header>
 
             <div class="wrapper">
@@ -43,7 +58,7 @@
                     </p>
                 </div><!-- /.location-info -->
                 <div class="location-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3198.919487581377!2d137.84106401214348!3d36.700472572160095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5ff7ce079876942b%3A0x53f668510246af3c!2z6Zuq44Gu6I2YIEhha3ViYSBIb3NwaXRhbGl0eSBJbm4gWVVLSU5PU08!5e0!3m2!1sja!2sjp!4v1752833295653!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/d/embed?mid=16yWEHQNKxfRj5KIWGgl1ad47tin6pos&ehbc=2E312F" width="640" height="480"></iframe>
                 </div><!-- /.location-map -->
             </div><!-- /.wrapper -->
         </section><!-- /#location -->
@@ -52,7 +67,15 @@
             <div class="wrapper">
                 <div class="sns-box">
                     <h3 class="sub-title">Booking.com</h3>
-                    <iframe src=https://www.booking.com/hotel/jp/yukinoso-hakuba.ja.html width="340" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                    <p><a href="https://www.booking.com/hotel/jp/yukinoso-hakuba.ja.html">booking.comで雪の荘を予約する</a></p>
+                </div>
+                <div class="sns-box">
+                    <h3 class="sub-title">Ameba</h3>
+                    <p><a href="https://ameblo.jp/hikamaru1616/">アメーバブログで丸丸家の日々を読む</a></p>
+                </div>
+                <div class="sns-box">
+                    <h3 class="sub-title">Tumblr</h3>
+                    <p><a href="https://marucama.tumblr.com/">Tumblrで作品を見る</a></p>
                 </div>
             </div><!-- /.wrapper -->
         </section><!-- /#sns -->
