@@ -35,7 +35,7 @@ img {
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     font-weight: normal;
-    text-shadoe: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 .sub-title {
     font-size: 1.375rem;
