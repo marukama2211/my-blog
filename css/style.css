@@ -319,7 +319,7 @@ footer p {
         height: 100%;
         z-index: 99;
         left: 100%;
-        background: rgba(18 18 18 0.66);
+        background: rgba(18, 18, 18, 0.7);
         display: flex;
         flex-direction: column;
         justify-content: center;
