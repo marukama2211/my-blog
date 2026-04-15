@@ -1,34 +1,19 @@
 <!DOCTYPE html>
-<!--　　
-                   ⡀⣠⢞⣇⡀
-              ⣀⣾⣹⣹⣳⣕⣃⣸⠷⣄⡀
-     ⢀⣤⡶⠟⠛⠉⠉⡀⡀⡀⡀⡀⠉⠉⠛⠿⣾⣝⡶⣤⣀          ⣀⣶⣿⠉
-   ⣤⠟⠉⡀⡀⣆⠐⠁⠉⠉⠈⠘⠒⠠⣀⠐⡀⡀⡀⠈⠙⠷⣮⣫⢶⡀⡀⢀⢾⣭⣿⡀
-⣠⠟⡀⠷⡀⡀⢄⠘⡀⢀⣤⡶⡖⡀⡀⡀⡀⡀⠈⠉⠒⠠⠤⢄⡀⢈⠙⠳⠶⠻⣭⣶⠁
-⠣⢄⣳⡀⠄⠐⡸⢀⡀⠨⣖⣽⡀⠁⢀⡀⢐⡀⢄⠠⠄⠄⡀⡀⡀⡀⣀⡤⠢⣸⡻⣿
- ⠈⠢⣀⢀⠠⢀⠞⡀⠘⠉⠄⡀⡀⡀⡀⡀⡀⢀⣀⠄⠐⣁⠔⡫⣳⠞   ⠈⣮⠿⡆
-    ⠈⠉⠒⠦⠤⢄⡀⡀⣈⣣⣨⡦⠴⠖⠋⠰⢫⣹⠛⠉          ⠻⣾⡄
-             ⢿⣝           ⢻                ⠉⡀
-              ⠙⡀
--->
 <html lang="ja">
     <head>
         <meta charset="utf-8">
-        <title>marucama.com | 登山,旅行,カメラ</title>
+        <title>marucama - NEWS</title>
         <meta name="description" content="民宿オブ白馬村">
-        <link rel="canonical" href="https://www.marucama.com/">
         <link rel="icon" type="image/png" href="images/favicon.png">
         <link rel="apple-touch-icon" href="images/apple-touch-icon.png" sizes="180×180">
         <link rel="icon" type="image/png" href="images/android-touch-icon.png" sizes="192×192">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="index, follow">
 
-        <meta property="og:url" content="https://www.marucama.com/index.html">
+        <meta property="og:url" content="https://www.marucama.com/news.html">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="Marucama Home">
-        <meta property="og:description" content="白馬村を知ってもらうためのサイトです。このサイトを見れば白馬村に行きたくなるかもよ。">
-        <meta property="images/index.webp">
-            
+        <meta property="og:title" content="Marucama News">
+        <meta property="og:description" content="まるかまのブログだよ。登山やカメラについて書くよ。">
+        <meta property="images/news.webp">
 
     <!-- CSS -->
         <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
@@ -36,10 +21,12 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+    <!-- LaTeX -->
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </head>
 
     <body>
-        <div id="home" class="big-bg">
+        <div id="news" class="big-bg">
             <header class="page-header wrapper">
                 <h1><a href="index.html"><img class="logo" src="images/logo.png" alt="まるかま ホーム"></a></h1>
                 <input id="menu-open" type="checkbox">
@@ -56,11 +43,24 @@
                 </ul>
             </header>
 
-            <div class="home-content wrapper">
-                <h2 class="page-title">MARUCAMA</h2>
-                <p>Regrets continue.</p>
-                <a class="button" id="latest-link" href="2026-04-15-firstpost.html">最新記事</a>
-            </div><!-- /.home-content -->
-        </div><!-- /#home -->
+            <div class="wrapper">
+                <h2 class="page-title">News</h2>
+            </div><!-- /.wrapper -->
+        </div><!-- /#news -->
+
+        <div class="news-catalog">
+          <div class="wrapper">
+            <div class="tag-links">
+              <!-- TAG_LINKS -->
+            </div>
+            <!-- ARTICLES -->
+          </div>
+        </div><!-- /.news-catalog -->
+
+        <footer>
+            <div class="wrapper">
+                <p><small>&copy; 2025 marucama. All rights reserved.</small></p>
+            </div>
+        </footer>
     </body>
 </html>

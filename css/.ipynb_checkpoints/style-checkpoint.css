@@ -97,7 +97,7 @@ iframe {
 /* HOME
 ------------------------------- */
 #home {
-    background-image: url("https://64.media.tumblr.com/ab4c0c8062cc8d4c04f046a0a0685359/7ee668739579702c-8a/s1280x1920/5828e00309c62ad2e1a34eae67963bd3caf6acba.jpg");
+    background-image: url("../images/index.webp");
     background-position: center 75%;
     min-height: 100vh;
     color:#eeeeee;
@@ -119,7 +119,7 @@ iframe {
 /* NEWS
 ------------------------------- */
 #news {
-    background-image: url("https://64.media.tumblr.com/0a65cd9e70cddd02947dbc7e6126cc22/a0211cbfac83ddeb-59/s1280x1920/d74b28b7dd64ade7b74401a71eb714ac29c725fd.jpg");
+    background-image: url("../images/news.webp");
     background-position: center 80%;
     height: 270px;
     margin-bottom: 40px;
@@ -132,74 +132,198 @@ iframe {
 }
 
 /* 一覧 */
-.news-catalog .grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+
+/* 全体を1列ベースレイアウトに */
+.news-catalog {
+  width: 100%;
+  padding: 0;
+  margin: 60px auto; /* ← PC時の余白強化 */
 }
 
+/* 記事単位のカード */
 .news-catalog .item {
-  display: flex;
-  flex-direction: column;
-  background: #ebebeb;
-  padding: 1rem;
-  border-radius: 4px;
+  display: block;
+  margin-bottom: 48px; /* 以前より少し余裕を持たせる */
+  cursor: pointer;
+  border-bottom: 1px solid #111;  /* 直線的・無骨な印象 */
+  padding-bottom: 28px;
+  transition: transform 0.2s ease;
 }
 
-.news-catalog .main-link {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  text-decoration: none;
-  color: #888888;
+.news-catalog .item:hover {
+    transform: scale(1.03);
 }
 
-.news-catalog .main-link img {
-  width: 100px;
-  height: auto;
+/* 記事画像（上部に配置） */
+.news-catalog .item img {
+  width: 100%;
+  height: 280px;
   object-fit: cover;
-  border-radius: 4px;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
+  display: block;
+  border-radius: 0 !important;
 }
 
-.news-catalog .main-link h3 {
-  font-size: 1.2rem;
-  margin: 0;
-  transition color 0.3s ease;
+/* オーバーレイ見た目変更 */
+.news-catalog .item .overlay {
+  padding: 18px 6px 0px;
 }
 
-.news-catalog .main-link:hover img {
-    transform: scale(1.05);
+/* タイトル */
+.news-catalog .item .title {
+  font-size: 2rem;
+  margin: 0 0 6px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
 }
 
-.news-catalog .main-link:hover h3 {
-    color: #4a90e2;
-}
-
-.news-catalog .meta {
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-  color: #666;
+/* タグ & 日付 */
+.news-catalog .item .meta {
+  font-size: 0.9rem;
+  opacity: 0.75;
   display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 16px;
+  padding-top: 3px;
 }
 
-.news-catalog .meta .tag {
-  background-color: #e0e0e0;
-  padding: 0.1em 0.5em;
-  border-radius: 3px;
+.news-catalog .item .tag {
   text-decoration: none;
-  color: #333;
+  pointer-events: none; /* ←クリック禁止 */
+  opacity: .75;
 }
 
-.news-catalog .meta .tag:hover {
-  background-color: #ddd;
+.news-catalog .item .date {
+  opacity: .75;
+}
+
+/* ニュース一覧のリンクはすべて同じ見た目にする */
+.news-catalog a,
+.news-catalog a:visited {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+/* PC時余白を更に増やす */
+@media screen and (min-width: 960px) {
+  .news-catalog {
+    width: min(900px, 90%);
+    margin: 80px auto 100px auto; /* ←余白大きめ */
+  }
+
+  .news-catalog .item {
+    margin-bottom: 60px;
+    padding-bottom: 38px;
+  }
+
+   .news-catalog .item img {
+    height: 320px;
+    object-fit: cover;
+    object-position: center; /* ←中央基準でトリミング */
+  }
 }
 
 /* 記事部分 */
+article {
+    width: 74%;
+}
+
+/* ===============================
+   タグ一覧リンク
+================================= */
+.tag-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* 横方向：左詰め */
+    align-items: flex-start;  
+    
+    gap: 10px;
+    margin-bottom: 2em;
+}
+
+.tag-links a {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    color: #555;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.tag-links a:hover {
+    color: #000;
+    border-color: #000;
+    background: #f5f5f5;
+}
+
+/* ===============================
+   リスト（シック強化）
+================================= */
+article ul,
+article ol {
+    margin: 1.5em 0;
+    padding-left: 1.5em;
+}
+
+article ul {
+    list-style: none;
+}
+
+article ul li {
+    position: relative;
+    padding-left: 1.2em;
+    margin-bottom: 0.5em;
+}
+
+article ul li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: #888;
+}
+
+/* ===============================
+   番号付きリスト（ol）
+================================= */
+article ol {
+    list-style: none;
+    counter-reset: item;
+    margin: 1.5em 0;
+    padding-left: 0;
+}
+
+article ol li {
+    counter-increment: item;
+    position: relative;
+    padding-left: 2em;
+    margin-bottom: 0.6em;
+}
+
+/* 番号デザイン */
+article ol li::before {
+    content: counter(item) ".";
+    position: absolute;
+    left: 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* ===============================
+   リンク（シック＆統一）
+================================= */
+article a {
+    color: #222;
+    border-bottom: 1px solid #aaa;
+    transition: all 0.25s ease;
+}
+
+article a:hover {
+    color: #000;
+    border-bottom: 1px solid #000;
+}
+
+/* ===============================
+   段落（読みやすさ改善）
+================================= */
 article {
     width: 74%;
 }
@@ -240,6 +364,71 @@ article img {
 }
 article p {
     margin-bottom: 1rem;
+}
+
+/* ===============================
+   目次（強化版）
+================================= */
+.toc {
+    border: 1px solid #ddd;
+    padding: 1.8em;
+    margin: 2.5em 0;
+    background-color: #f0f0f0;
+    color: #222;
+    font-size: 1.05rem;
+}
+
+/* タイトル */
+.toc h3 {
+    margin-top: 0;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #111;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.6em;
+}
+
+/* リスト */
+.toc ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1em 0 0 0;
+}
+
+.toc li {
+    margin-bottom: 0.6em;
+}
+/* TOCではダッシュを消す */
+.toc li::before {
+    content: none !important;
+}
+
+/* リンク */
+.toc a {
+    display: inline-block;
+    text-decoration: none;
+    color: #222;
+    font-size: 1.3rem;   /* ←ここで大きくする */
+    font-weight: 500;     /* ←少し太く */
+    border-bottom: 1px solid #bbb;
+    letter-spacing: 0.02em;
+    transition: all 0.25s ease;
+}
+
+.toc a:hover {
+    color: #000;
+    border-bottom: 1px solid #000;
+}
+
+/* セクションタイトル */
+.section-title {
+    font-size: 1.4rem;
+    color: #222;
+    margin-top: 2.5em;
+    margin-bottom: 0.5em;
+    border-left: 4px solid #444;
+    padding-left: 0.75em;
+    font-weight: bold;
 }
 
 /* サイドバー */
@@ -283,22 +472,30 @@ aside p {
 /* GALLERY
 ------------------------------- */
 #gallery {
-    background-image: url("https://64.media.tumblr.com/63cba7dbc8271553f94088eef0d592a2/d7bcdbce5754b15b-3b/s1280x1920/6e60744b21158457008696e916dca2e987abac35.jpg");
+    background-image: url("../images/gallery.webp");
     min-height: 100vh;
     color:#eeeeee;
 }
 .grid {
-  display: grid;
-  gap: 26px;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  margin-top: 6%;
-  margin-bottom: 50px;
+  column-count: 4;      /* PC時 */
+  column-gap: 24px;     /* 余白 */
+  margin-top: 30px;
 }
 
+.grid .item {
+  break-inside: avoid;  /* 要ポイント */
+  margin-bottom: 24px;
+}
+
+.grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
 /* CONTACT
 ------------------------------- */
 #contact {
-    background-image: url("https://64.media.tumblr.com/c05ef2af4cb96ae9d3e002c71f8f51d0/7ee668739579702c-b0/s1280x1920/ab14f75d97a65ff1fff829cc82582411155a7803.jpg");
+    background-image: url("../images/contact.webp");
     background-position: center;
     min-height: 100vh;
     color:#eeeeee;
@@ -362,6 +559,18 @@ footer p {
 
 /* モバイル版
 ------------------------------- */
+@media (max-width: 1024px) {
+  .grid {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    column-count: 2;
+  }
+}
+
 @media (max-width: 600px) {
     .page-title {
         font-size: 2.5rem;

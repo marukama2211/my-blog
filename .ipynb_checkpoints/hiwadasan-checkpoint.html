@@ -2,18 +2,18 @@
 <html lang="ja">
 <head>
     <meta charset="utf-8">
-    <title>{title}</title>
-    <meta name="description" content="{description}">
+    <title>{TITLE}</title>
+    <meta name="description" content="{DESCRIPTION}">
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png" sizes="180×180">
     <link rel="icon" type="image/png" href="images/android-touch-icon.png" sizes="192×192">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:url" content="https://www.marucama.com/{filename}">
+    <meta property="og:url" content="https://www.marucama.com/{FILENAME}">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{title}">
-    <meta property="og:description" content="{description}">
-    <meta property="og:image" content="{cover}">
+    <meta property="og:title" content="Marucama News">
+    <meta property="og:description" content="まるかまのブログだよ。登山やカメラについて書くよ。">
+    <meta property="og:image" content="{OG_IMAGE}">
 
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,32 +48,21 @@
     <div class="news-contents wrapper">
         <article>
             <header class="post-info">
-                <h2 class="post-title">{title}</h2>
-                <p class="post-date">{date} <span>{year}</span></p>
-                <p class="post-cat">カテゴリー：{tags}</p>
+                <h2 class="post-title">{TITLE}</h2>
+                <p class="post-date">{DATE} <span>{YEAR}</span></p>
+                <p class="post-cat">カテゴリー：{CATEGORY}</p>
             </header>
-            <img src="{cover}" alt="{coverdescription}">
-            {content}
+            <img src="images/{MAIN_IMAGE}">
+            <p>
+                {BODY}
+            </p>
         </article>
 
         <aside>
             <h3 class="sub-title">新着記事</h3>
             <ul class="hot-news">
-<li><a href="2026-04-14-disnie.html">ディズニーシーに行ってきた</a></li>
-<li><a href="2026-04-14-otaru.html">小樽旅行</a></li>
-<li><a href="2026-04-14-hikouki.html">飛行機写真集</a></li>
-<li><a href="2026-04-14-raicho.html">雷鳥写真集</a></li>
-</ul>
-            <h3 class="sub-title">writerについて</h3>
-            <p>
-                僕は白馬村の雪の荘ってとこに住んでたんだよ。
-            </p>
-            <p>
-                白馬村で大自然を堪能して満喫したい？だったら雪の荘に来なよ。
-            </p>
-            <p>
-                夏の登山や冬のスキーはもちろん、春の少し遅れた桜や秋の少し早まった紅葉だって楽しめるよ～
-            </p>
+                <li><a href="#">（あとで自動生成）</a></li>
+            </ul>
         </aside>
     </div>
 
