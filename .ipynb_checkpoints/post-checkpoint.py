@@ -228,7 +228,7 @@ class ArticleBuilder:
         self.cover = "images/default.jpg"
 
     def load_tag_map(self):
-        path = "news-catalog/tags.json"
+        path = "json/tags.json"
         if not os.path.exists(path):
             return {}
         with open(path, encoding="utf-8") as f:
@@ -236,7 +236,7 @@ class ArticleBuilder:
 
     def save_tag_map(self, m):
         os.makedirs("news-catalog", exist_ok=True)
-        with open("news-catalog/tags.json", "w", encoding="utf-8") as f:
+        with open("json/tags.json", "w", encoding="utf-8") as f:
             json.dump(m, f, ensure_ascii=False, indent=2)
 
     def save_json(self):
