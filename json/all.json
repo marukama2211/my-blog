@@ -34,5 +34,17 @@
     ],
     "link": "2026-04-15-daigaku.html",
     "image": "images/default.webp"
+  },
+  {
+    "title": "colabより愛をこめて",
+    "date": "2026-04-16",
+    "tags": [
+      {
+        "ja": "その他",
+        "en": "other"
+      }
+    ],
+    "link": "2026-04-16-from_colab_with_love.html",
+    "image": "images/default.webp"
   }
 ]
