@@ -434,7 +434,7 @@ class SiteUpdater:
 </a>
 """
 
-            header = f'<h2 class="section-title">カテゴリー：{ja}</h2>\n'
+            header = f'<h2 class="category-title">{ja}</h2>\n'
             html = template
             html = html.replace("<!-- TAG_LINKS -->", tag_links)
             html = html.replace("<!-- ARTICLES -->", header + items)
