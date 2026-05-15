@@ -4,6 +4,7 @@ import os
 import json
 import re
 from bs4 import BeautifulSoup
+import html
 
 
 # =========================
@@ -28,6 +29,11 @@ class BlockRenderer:
         return "/".join(self.handlers.keys())
 
     def render(self, tag):
+
+        if tag == "code":
+            language = input("言語(python/js/htmlなど)：").strip()
+            return self.handlers[tag](language)
+    
         return self.handlers[tag]()
 
     def render_p(self):
@@ -49,17 +55,22 @@ class BlockRenderer:
     def render_hr(self):
         return "<hr>"
 
-    def render_code(self):
-        print("コード入力（空Enterで終了）：")
+    def render_code(self, language=""):
+        print("コード入力（ENDで終了）：")
         lines = []
         while True:
             line = input()
-            if line == "":
+            if line == "END":
                 break
             lines.append(line)
     
         code = "\n".join(lines)
-        return f"<pre><code>{code}</code></pre>"
+
+        escaped = html.escape(code)
+
+        lang_class = f' language-{language}' if language else ""
+        
+        return f'''<pre class="code-block"><code class="{lang_class.strip()}">{escaped}</code></pre>'''
 
     def render_ul(self):
         items = []

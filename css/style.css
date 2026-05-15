@@ -466,6 +466,38 @@ article p {
   border-bottom: 1px solid #000;
 }
 
+/* ===============================
+   コードブロック
+================================= */
+.code-block {
+  overflow-x: auto;
+
+  margin: 2.5rem 0;
+  padding: 1.4rem 1.6rem;
+
+  background: #ececec;
+
+  border-left: 4px solid #444;
+
+  font-size: 0.95rem;
+  line-height: 1.75;
+
+  color: #222;
+}
+
+/* code */
+.code-block code {
+  font-family:
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    monospace;
+
+  white-space: pre;
+}
+
+
 /* セクションタイトル */
 .section-title {
   font-size: 1.4rem;
