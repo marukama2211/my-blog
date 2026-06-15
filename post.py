@@ -510,7 +510,7 @@ class SiteUpdater:
         items.sort(key=lambda x: x[0] == "その他")
         cat_html = "\n".join([
             f'<li><a href="tag_{en}.html">{ja}</a></li>'
-            for ja, en in tags.items()
+            for ja, en in items
         ])
     
         for file in os.listdir():
