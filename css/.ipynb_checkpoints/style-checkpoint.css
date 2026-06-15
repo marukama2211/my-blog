@@ -419,6 +419,14 @@ article {
 article img {
   margin-bottom: 20px;
 }
+.section-title {
+  font-size: 1.25rem;
+  margin: 2em 0 0.8em;
+  padding-left: 0.8em;
+  border-left: 3px solid #121212;
+  line-height: 1.4;
+  color: #1a1a1a;
+}
 article p {
   margin-bottom: 1rem;
 }
@@ -506,18 +514,6 @@ article p {
     monospace;
 
   white-space: pre;
-}
-
-
-/* セクションタイトル */
-.section-title {
-  font-size: 1.4rem;
-  color: #222;
-  margin-top: 2.5em;
-  margin-bottom: 0.5em;
-  border-left: 4px solid #444;
-  padding-left: 0.75em;
-  font-weight: bold;
 }
 
 /* サイドバー */
