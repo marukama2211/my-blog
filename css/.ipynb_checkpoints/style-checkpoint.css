@@ -132,121 +132,118 @@ iframe {
   margin-bottom: 50px;
 }
 
-/* 一覧 */
+/* =========================================
+   提案①：ミニマル・スプリット型（左右2カラム）
+   ========================================= */
 
-/* 全体を1列ベースレイアウトに */
+/* 記事全体の余白調整 */
 .news-catalog {
   width: 100%;
   padding: 0;
-  margin: 60px auto; /* ← PC時の余白強化 */
 }
 
-/* 記事単位のカード */
+.news-catalog .wrapper {
+  margin: 60px auto 100px auto;
+  max-width: 900px;
+}
+
+/* 記事カード（枠線なし、フラット） */
 .news-catalog .item {
   display: block;
-  margin-bottom: 48px; /* 以前より少し余裕を持たせる */
-  cursor: pointer;
-  border-bottom: 1px solid #111; /* 直線的・無骨な印象 */
-  padding-bottom: 28px;
-  transition: transform 0.2s ease;
-}
-
-.news-catalog .item:hover {
-  transform: scale(1.03);
-}
-
-/* 記事画像（上部に配置） */
-.news-catalog .item img {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  display: block;
-  border-radius: 0 !important;
-}
-
-/* オーバーレイ見た目変更 */
-.news-catalog .item .overlay {
-  padding: 18px 6px 0px;
-}
-.news-catalog .item .overlay > h3 {
-  display: block;
-
-  background: linear-gradient(
-    90deg,
-    rgba(17, 17, 17, 0.92) 0%,
-    rgba(17, 17, 17, 0.85) 55%,
-    rgba(17, 17, 17, 0) 100%
-  );
-
-  color: #f5f5f5;
-
-  padding: 0.12em 0.55em 0.18em;
-
-  font-size: 2rem;
-  font-weight: 400;
-  line-height: 1.45;
-
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-
-/* タイトル */
-.news-catalog .item h3 {
-  display: block;
-  background: #111;
-  color: #f5f5f5;
-  padding: 0.15rem 0.45rem;
-    
-  font-size: 2rem;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  line-height: 1.35;
-
-  margin-bottom: 10px;
-}
-
-/* タグ & 日付 */
-.news-catalog .item .meta {
-  font-size: 0.9rem;
-  opacity: 0.75;
-  display: flex;
-  gap: 16px;
-  padding-top: 3px;
-}
-
-.news-catalog .item .tag {
+  margin-bottom: 56px;
   text-decoration: none;
-  pointer-events: none; /* ←クリック禁止 */
-  opacity: 0.75;
+  color: #1a1a1a;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 40px;
 }
 
+/* 左右を分割するコンテナ（flexbox） */
+.news-catalog .item .thumb {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 32px;
+  overflow: hidden;
+  height: 200px; /* 固定高にして整列 */
+}
+
+/* 左カラム：画像 */
+.news-catalog .item .thumb img {
+  width: 38%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.news-catalog .item:hover .thumb img {
+  opacity: 0.85;
+}
+
+/* 右カラム：テキスト情報 */
+.news-catalog .item .overlay {
+  width: 62%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+}
+
+/* タグ（カテゴリ） */
+.news-catalog .item .tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #a8936a; /* アースカラー */
+  margin-bottom: 8px;
+  opacity: 1;
+}
+
+/* 記事タイトル */
+.news-catalog .item h3 {
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.45;
+  margin: 0 0 12px 0;
+  color: #1a1a1a;
+  background: transparent;
+  padding: 0;
+  transition: color 0.25s ease;
+  letter-spacing: 0.02em;
+}
+
+.news-catalog .item:hover h3 {
+  color: #a8936a; /* タイトルをホバー時に色変化 */
+}
+
+/* 日付 */
 .news-catalog .item .date {
-  opacity: 0.75;
+  font-size: 0.8rem;
+  color: #888888;
+  font-weight: 500;
+  opacity: 0.8;
 }
 
-/* ニュース一覧のリンクはすべて同じ見た目にする */
+/* 訪問済みリンク色のリセット */
 .news-catalog .item,
 .news-catalog .item:visited {
   text-decoration: none !important;
-  color: inherit !important;
+  color: #1a1a1a !important;
 }
 
-/* PC時余白を更に増やす */
-@media screen and (min-width: 960px) {
-  .news-catalog {
-    width: min(900px, 90%);
-    margin: 80px auto 100px auto; /* ←余白大きめ */
+/* モバイル対応（縦並びに戻す） */
+@media (max-width: 600px) {
+  .news-catalog .item .thumb {
+    flex-direction: column;
+    height: auto;
+    gap: 16px;
   }
-
-  .news-catalog .item {
-    margin-bottom: 60px;
-    padding-bottom: 38px;
+  .news-catalog .item .thumb img {
+    width: 100%;
+    height: 200px;
   }
-
-  .news-catalog .item img {
-    height: 320px;
-    object-fit: cover;
-    object-position: center; /* ←中央基準でトリミング */
+  .news-catalog .item .overlay {
+    width: 100%;
   }
 }
 
@@ -268,20 +265,19 @@ article {
 
 .tag-links a {
   display: inline-block;
-
   padding: 0.55rem 1rem;
 
   background: #ebebeb;
   color: #333;
 
-  border-radius: 999px;
+  border: 1px solid #d0d0d0;
+  border-radius: 0;
 
   font-size: 0.92rem;
   letter-spacing: 0.03em;
 
   transition:
     background 0.25s ease,
-    transform 0.2s ease,
     color 0.25s ease;
 }
 
@@ -289,6 +285,18 @@ article {
   background: #222;
   color: #f5f5f5;
   transform: translateY(-1px);
+}
+
+.tag-links a.active {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+
+.tag-links a apan {
+    margin-left: 0.35rem;
+    opacity: 0.7;
+    font-size: 0.9rem;
 }
 
 .category-title {
@@ -568,7 +576,6 @@ aside p {
 .grid img {
   width: 100%;
   height: auto;
-  border-radius: 6px;
 }
 /* CONTACT
 ------------------------------- */

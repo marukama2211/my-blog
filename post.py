@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 import os
 import json
 import re
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Comment
 import html
 
 
@@ -96,14 +96,12 @@ class BlockRenderer:
         while True:
             src = input("画像URLまたはファイル名：")
             if src.startswith("http"):
-                parsed = urlparse(src)
-                if parsed.netloc.endswith("media.tumblr.com"):
-                    break
-                print("tumblrのみ")
-            else:
-                if os.path.splitext(src)[1].lower() in [".jpg", ".png", ".webp"]:
-                    src = f"images/{src}"
-                    break
+                break
+                
+            if os.path.splitext(src)[1].lower() in [".jpg", "jpeg", ".png", ".webp"]:
+                src = f"images/{src}"
+                break
+                
         alt = input("alt：")
         return f'<img src="{src}" alt="{alt}">'
 
@@ -224,7 +222,7 @@ class ArticleEditor:
         </div>
         """
 
-        return toc + "\n" + "\n".join(self.content)
+        return (self.content[0] + "\n" + toc + "\n" + "\n".join(self.content[1:]))
 
 
 # =========================
@@ -324,7 +322,7 @@ class ArticleBuilder:
         )
 
         if not self.head.description:
-            text = re.sub(r'<.*?>', '', content)
+            text = BeautifulSoup(content, "html.parser").get_text()
             self.head.description = text[:120]
 
         if input("保存しますか？(y/n)：") == "y":
@@ -371,6 +369,15 @@ class SiteUpdater:
                 tags[t["ja"]] = t["en"]
         return tags
 
+    def get_tag_counts(self, data):
+        counts = {}
+    
+        for article in data:
+            for tag in article.get("tags", []):
+                counts[tag["ja"]] = counts.get(tag["ja"], 0) + 1
+    
+        return counts
+
     def generate_news(self):
         data = self.normalize_tags(self.load())
 
@@ -392,23 +399,35 @@ class SiteUpdater:
 """
 
         tags = self.collect_tags(data)
+        tag_counts = self.get_tag_counts(data)
+        
         items_list = list(tags.items())
         items_list.sort(key=lambda x: x[0] == "その他")
-    
+        
         tag_links = "\n".join([
-            f'<a href="tag_{en}.html">{ja}</a>'
+            f'<a href="tag_{en}.html">{ja} <span>{tag_counts.get(ja, 0)}</span></a>'
             for ja, en in items_list
         ])
 
         with open("news_template.html", encoding="utf-8") as f:
             template = f.read()
 
-        html = template
-        html = html.replace("<!-- TAG_LINKS -->", tag_links)
-        html = html.replace("<!-- ARTICLES -->", items)
+        soup = BeautifulSoup(template, "html.parser")
+        
+        tag_links_comment = soup.find(string=lambda s: isinstance(s, Comment) and s.strip() == "TAG_LINKS")
+        if not tag_links_comment:
+            tag_links_comment = soup.find(text=lambda s: isinstance(s, Comment) and s.strip() == "TAG_LINKS")
+        if tag_links_comment:
+            tag_links_comment.replace_with(BeautifulSoup(tag_links, "html.parser"))
+
+        articles_comment = soup.find(string=lambda s: isinstance(s, Comment) and s.strip() == "ARTICLES")
+        if not articles_comment:
+            articles_comment = soup.find(text=lambda s: isinstance(s, Comment) and s.strip() == "ARTICLES")
+        if articles_comment:
+            articles_comment.replace_with(BeautifulSoup(items, "html.parser"))
 
         with open("news.html", "w", encoding="utf-8") as f:
-            f.write(html)
+            f.write(str(soup))
 
         print("news.html更新完了")
 
@@ -419,16 +438,27 @@ class SiteUpdater:
         with open("news_template.html", encoding="utf-8") as f:
             template = f.read()
 
+            tag_counts = self.get_tag_counts(data)
+
             items_list = list(tags.items())
             items_list.sort(key=lambda x: x[0] == "その他")
-        
-            tag_links = "\n".join([
-                f'<a href="tag_{en}.html">{ja}</a>'
-                for ja, en in items_list
-            ])
 
         for ja, en in tags.items():
             articles = [a for a in data if any(t["ja"] == ja for t in a.get("tags", []))]
+
+            tag_links = "\n".join([
+                (
+                    f'<a href="tag_{tag_en}.html" class="active">'
+                    f'{tag_ja} <span>{tag_counts.get(tag_ja, 0)}</span></a>'
+                )
+                if tag_ja == ja
+                else
+                (
+                    f'<a href="tag_{tag_en}.html">'
+                    f'{tag_ja} <span>{tag_counts.get(tag_ja, 0)}</span></a>'
+                )
+                for tag_ja, tag_en in items_list
+            ])
 
             items = ""
             for a in reversed(articles):
@@ -445,13 +475,22 @@ class SiteUpdater:
 </a>
 """
 
-            header = f'<h2 class="category-title">{ja}</h2>\n'
-            html = template
-            html = html.replace("<!-- TAG_LINKS -->", tag_links)
-            html = html.replace("<!-- ARTICLES -->", header + items)
+            soup = BeautifulSoup(template, "html.parser")
+            
+            tag_links_comment = soup.find(string=lambda s: isinstance(s, Comment) and s.strip() == "TAG_LINKS")
+            if not tag_links_comment:
+                tag_links_comment = soup.find(text=lambda s: isinstance(s, Comment) and s.strip() == "TAG_LINKS")
+            if tag_links_comment:
+                tag_links_comment.replace_with(BeautifulSoup(tag_links, "html.parser"))
+
+            articles_comment = soup.find(string=lambda s: isinstance(s, Comment) and s.strip() == "ARTICLES")
+            if not articles_comment:
+                articles_comment = soup.find(text=lambda s: isinstance(s, Comment) and s.strip() == "ARTICLES")
+            if articles_comment:
+                articles_comment.replace_with(BeautifulSoup(items, "html.parser"))
 
             with open(f"tag_{en}.html", "w", encoding="utf-8") as f:
-                f.write(html)
+                f.write(str(soup))
 
         print("タグ別ページ生成/更新完了")
 
@@ -474,13 +513,6 @@ class SiteUpdater:
             for ja, en in tags.items()
         ])
     
-        cat_block = f"""
-    <h3 class="sub-title">カテゴリー</h3>
-    <ul class="sub-menu">
-    {cat_html}
-    </ul>
-    """
-    
         for file in os.listdir():
             if not file.endswith(".html") or file == "news.html":
                 continue
@@ -488,24 +520,23 @@ class SiteUpdater:
             with open(file, encoding="utf-8") as f:
                 html = f.read()
     
-            # 新着記事更新
-            html = re.sub(
-                r'(<ul class="hot-news">)(.*?)(</ul>)',
-                r'\1\n' + hot + r'\3',
-                html,
-                flags=re.DOTALL
-            )
-    
-            # カテゴリー挿入
-            html = re.sub(
-                r'(<ul class="sub-menu">)(.*?)(</ul>)',
-                r'\1\n' + cat_html + r'\3',
-                html,
-                flags=re.DOTALL
-            )
+            soup = BeautifulSoup(html, "html.parser")
+            hot_news_ul = soup.find("ul", class_="hot-news")
+            sub_menu_ul = soup.find("ul", class_="sub-menu")
+            
+            if not hot_news_ul and not sub_menu_ul:
+                continue
+                
+            if hot_news_ul:
+                hot_news_ul.clear()
+                hot_news_ul.append(BeautifulSoup(hot, "html.parser"))
+                
+            if sub_menu_ul:
+                sub_menu_ul.clear()
+                sub_menu_ul.append(BeautifulSoup(cat_html, "html.parser"))
     
             with open(file, "w", encoding="utf-8") as f:
-                f.write(html)
+                f.write(str(soup))
     
         print("サイドバー更新完了")
 
