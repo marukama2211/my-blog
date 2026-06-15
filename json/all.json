@@ -34,5 +34,17 @@
     ],
     "link": "2026-04-15-daigaku.html",
     "image": "images/default.webp"
+  },
+  {
+    "title": "中間試験",
+    "date": "2026-06-15",
+    "tags": [
+      {
+        "ja": "大学",
+        "en": "university"
+      }
+    ],
+    "link": "2026-06-15-chukan.html",
+    "image": "images/default.webp"
   }
 ]
