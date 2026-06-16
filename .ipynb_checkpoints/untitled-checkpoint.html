@@ -1,0 +1,53 @@
+<hr />
+<h2>③ コマンドとして残すべきもの（重要）</h2>
+<p>ここが設計の肝</p>
+<h3>❗ 残すべきはこれだけ</h3>
+<h4><code>h4</code>（見出し系）</h4>
+<p>Markdownで十分だが注意点：</p>
+<ul>
+<li>h1〜h6の統一設計が必要</li>
+</ul>
+<p>→ Markdownで <code>###</code> に統一した方が良い</p>
+<p>ただしCMS的に「記事構造制御」が必要なら残すのはアリ</p>
+<hr />
+<h3>❗ <code>p</code>に相当するものは「廃止してよいが、最重要」</h3>
+<p>理由：</p>
+<ul>
+<li>CMSの全ての基本単位</li>
+<li>これがコマンドだと全てが冗長になる</li>
+</ul>
+<hr />
+<h2>④ まとめ（かなり重要）</h2>
+<p>あなたのハンドラは本質的にこう分解できる：</p>
+<h3>Markdownに完全移行</h3>
+<ul>
+<li>b</li>
+<li>em</li>
+<li>hr</li>
+<li>ul</li>
+<li>ol</li>
+<li>a</li>
+<li>p</li>
+</ul>
+<h3>Markdown＋拡張で残す</h3>
+<ul>
+<li>code</li>
+<li>img</li>
+</ul>
+<h3>コマンドで残すなら理由が必要</h3>
+<ul>
+<li>h系（構造制御したい場合のみ）</li>
+</ul>
+<hr />
+<h2>⑤ 理想構造（最終形）</h2>
+<p>今の設計の進化形はこれ：</p>
+<h3>入力層（Markdown）</h3>
+<pre><code class="language-text"># title
+
+ここは普通の文章 **強調**
+
+- list
+- list
+
+[link](url)
+</code></pre>
